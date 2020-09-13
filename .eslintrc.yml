@@ -1,0 +1,41 @@
+env:
+  node: true
+  es2020: true
+  es6: true
+  jest: true
+plugins:
+  - security
+extends:
+  - google
+  - 'eslint:recommended'
+  - 'plugin:security/recommended'
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parserOptions:
+  ecmaVersion: 2020
+  sourceType: module
+parser: 'babel-eslint'
+rules:
+  max-len:
+    - error
+    -
+      code: 100
+      ignoreUrls: true
+      ignoreComments: true
+      ignoreTrailingComments: true
+      ignoreStrings: true
+      ignoreTemplateLiterals: true
+      ignoreRegExpLiterals: true
+  require-jsdoc:
+    - off
+  arrow-parens:
+    - off
+  no-unused-vars:
+    - 1
+  object-curly-spacing: [error, always]
+  max-depth: [error, 4]
+  max-nested-callbacks: [warn, 3]
+  max-params: [warn, 5]
+  no-async-promise-executor: 0
+  #'prettier/prettier': [error, always]
