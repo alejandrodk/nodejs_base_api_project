@@ -1,7 +1,7 @@
 // All complex business logic must be here
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import AppError from '../../helpers/errors';
+import { error, debug } from '../../helpers/logger';
 
 /**
  *  Validate user
@@ -23,8 +23,8 @@ export function validateUser({ username, password, hash }) {
       } else {
         resolve(null);
       }
-    } catch (error) {
-      reject(error);
+    } catch (err) {
+      reject(err);
     }
   });
 }

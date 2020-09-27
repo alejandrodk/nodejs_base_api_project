@@ -1,7 +1,6 @@
 import BaseController from '../../models/baseController';
 import MainDAL from './mainDAL';
-import AppError from '../../helpers/errors';
-import logger from '../../helpers/logger';
+import { error, debug } from '../../helpers/logger';
 
 class MainController extends BaseController {
   constructor() {
@@ -16,6 +15,7 @@ class MainController extends BaseController {
    * @param {*} res
    */
   test(req, res) {
+    debug('DEBUGGING');
     MainController.sendBasicOkResponse({
       res,
       data: 'Hello World from Main!!',
@@ -29,15 +29,10 @@ class MainController extends BaseController {
    */
   errorTest(req, res) {
     try {
-      throw new Error('Testing error');
-    } catch (error) {
-      const apiError = new AppError({
-        description: 'Testing errors in test endpoint',
-        isOperational: 'false',
-        error,
-        stack: false,
-      });
-      logger(apiError);
+      // fake error.
+      req.query.INVALID.map(x => x);
+    } catch (err) {
+      error({ location: 'mainController', error: err });
       MainController.sendBasicErrorResponse({
         res,
         reason: 'Testing errors in test endpoint',

@@ -1,4 +1,4 @@
-import Errors from '../../helpers/errors';
+import { error, debug } from '../../helpers/logger';
 
 /**
  * Data Access Layer for Users Component

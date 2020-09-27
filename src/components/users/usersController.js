@@ -1,7 +1,7 @@
 import BaseController from '../../models/baseController';
 import UsersDAL from './usersDAL';
 import { validateUser } from './usersService';
-import logger from '../../helpers/logger';
+import { error, debug } from '../../helpers/logger';
 
 class UsersController extends BaseController {
   constructor() {
@@ -48,8 +48,8 @@ class UsersController extends BaseController {
         return token && UsersController.authenticationSuccess({ res, data });
       }
       return UsersController.authenticationFailure({ res });
-    } catch (error) {
-      logger(error);
+    } catch (err) {
+      error({ location: 'usersController', error: err });
       return UsersController.sendBasicErrorResponse({
         res,
         reason: 'Error occurred in user validation',

@@ -2,6 +2,7 @@ import http from 'http';
 import App from '../app/app';
 import express from 'express';
 import debug from 'debug';
+import chalk from 'chalk';
 
 const app = express();
 const server = http.createServer(app);
@@ -55,10 +56,10 @@ api.init(app, server).then(async () => {
   };
 
   server.listen(port, () => {
-    console.log(`\\*-------------------------*\\`);
-    console.log(` Server listen in port: ${port}`);
-    console.log(` http://localhost:${port}`);
-    console.log(`\\*-------------------------*\\`);
+    console.log(chalk.green(`*-----------------------------*`));
+    console.log(chalk.green(`| Server listen in port: ${port} |`));
+    console.log(chalk.green(`| http://localhost:${port}       |`));
+    console.log(chalk.green(`*-----------------------------*`));
   });
   server.on('error', onError);
   server.on('listening', onListening);

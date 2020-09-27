@@ -1,4 +1,4 @@
-import AppError from '../../helpers/errors';
+import { error, debug } from '../../helpers/logger';
 
 /**
  * Data Access Layer for Users Component
@@ -26,10 +26,7 @@ export default class UsersDAL {
       };
       return user || {};
     } catch (err) {
-      throw new AppError({
-        description: 'Error getting user from DB',
-        error: err,
-      });
+      error({ location: 'usersDAL', error: err });
     }
   }
 }

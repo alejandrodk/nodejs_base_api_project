@@ -1,6 +1,6 @@
 import createError from 'http-errors';
 import path from 'path';
-import logger from 'morgan';
+import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
 import express from 'express';
@@ -31,10 +31,12 @@ class App {
     app.set('views', path.join(__dirname, '../views'));
     app.set('view engine', 'ejs');
 
+    // logging
+    app.use(morgan('dev'));
+
     // Middlewares
     app.use(express.static(path.join(__dirname, '../../public')));
     app.use(express.urlencoded({ extended: false }));
-    app.use(logger('dev'));
     app.use(express.json());
     app.use(cookieParser());
     app.use(methodOverride('_method'));
